@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9e654;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #1f1f1f;
+
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+
+            border: none;
+            border-radius: 5px;
+
+            cursor: pointer;
+            color: white;
+        }
+
+        .logout-btn {
+            background-color: #f44336;
+        }
+
+        .logout-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .signup-btn {
+            background-color: #2196F3;
+        }
+
+        .signup-btn:hover {
+            background-color: #1976D2;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>You are signed in 🐒</h1>
+
+    <p>Welcome to your Flask + PostgreSQL practice project.</p>
+
+    <a href="/logout">
+        <button class="logout-btn">
+            Log Out
+        </button>
+    </a>
+
+    <a href="/">
+        <button class="signup-btn">
+            Sign Up
+        </button>
+    </a>
+
+</div>
+
+</body>
+</html>
