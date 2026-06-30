@@ -41,11 +41,11 @@
         src: /home/carrie/winter/kubernetes/
         dest: /home/ubuntu/winter/kubernetes/
 
-    - name: install k3s
-      shell: curl -sfL https://get.k3s.io | sh -s - \
-       --write-kubeconfig-mode 644
-      args:
-        creates: /usr/local/bin/k3s
+    - name: Install K3s
+      shell: |
+        curl -sfL https://get.k3s.io | sh -s - \
+          --write-kubeconfig-mode 644 \
+          --tls-san {{ ansible_host }}
 
     - name: install helm
       shell: |
