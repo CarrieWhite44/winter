@@ -21,8 +21,8 @@ pipeline {
             steps{
                 withCredentials([
                     usernamePassword(
-                        credentialsId: 'winter-docker-token-id'
-                        usernameVariable: 'DOCKER_USER'
+                        credentialsId: 'winter-docker-token-id',
+                        usernameVariable: 'DOCKER_USER',
                         passwordVariable: 'DOCKER_PASS'
                     )
                 ])
@@ -42,7 +42,7 @@ pipeline {
             steps{
                 withCredentials([
                     file(
-                        credentialsId: 'kubeconfig'
+                        credentialsId: 'kubeconfig',
                         variable: 'KUBECONFIG'
                     )
                 ]) {
