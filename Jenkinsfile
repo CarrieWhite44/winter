@@ -4,7 +4,7 @@ pipeline {
 
     environment{
         IMAGE_NAME = "tprff2301/winter-app"
-        IMAGE_TAG = ${BUILD_NUMBER}
+        IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
     stages{
