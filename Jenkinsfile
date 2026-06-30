@@ -42,15 +42,15 @@ pipeline {
             steps{
                 withCredentials([
                     file(
-                        credentialsId: 'kubeconfig',
+                        credentialsId: 'k3s-conf-winter',
                         variable: 'KUBECONFIG'
                     )
                 ]) {
                     sh '''
                     kubectl set image deployment/winter-app \
-                    winter-app=$IMAGE_NAME:$IMAGE_TAGE
+                    winter-app=$IMAGE_NAME:$IMAGE_TAG -n winter-space
 
-                    kubectl rollout status deployment/winter-app
+                    kubectl rollout status deployment/winter-app -n winter-space
                     '''
                 }
             }
