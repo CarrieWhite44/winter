@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+   name: winter-app
+   namespace: winter-space
+   
+spec:
+    replicas: 2 
+
+    selector:
+       matchLabels: 
+          app: winter-app
+
+
+    template:
+      metadata:
+        labels:
+          app: winter-app
+
+      spec:
+        containers:
+          - name: winter-app
+
+            image: tprff2301/winter-app:latest
+
+            ports: 
+            - containerPort: 5000
+
+            envFrom:
+            - configMapRef: 
+                name: winter-conf
+            - secretRef:
+                name: postgre-secret
+
+

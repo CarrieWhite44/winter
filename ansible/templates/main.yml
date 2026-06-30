@@ -1,0 +1,2 @@
+app_dir: "home/ubuntu/winter"
+docker_image: "tprff2301/winter-app:latest"

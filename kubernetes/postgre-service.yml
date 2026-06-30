@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+    name: postgre-service
+    namespace: winter-space
+
+spec:
+  selector:
+     app: postgre
+  
+  ports:
+  - port: 5432
+
+

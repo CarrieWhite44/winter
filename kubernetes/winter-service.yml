@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: winter-service
+  namespace: winter-space
+
+spec: 
+  selector:
+    app: winter-app
+
+  ports:
+   - port: 80
+     targetPort: 5000
+
+  type: ClusterIP 

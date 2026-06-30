@@ -1,0 +1,77 @@
+- hosts: web
+  become: yes
+
+  tasks:
+
+    - name: update apt
+      apt: 
+        update_cache: yes
+
+    - name: create app directory 
+      file:
+        path: /home/ubuntu/winter
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+
+    - name: create monitoring directory 
+      file:
+        path: /home/ubuntu/winter/monitoring
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+
+    - name: create k8s directory 
+      file:
+        path: /home/ubuntu/winter/kubernetes
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+
+    - name: copy monitoring files
+      copy:
+        src: /home/carrie/winter/monitoring/
+        dest: /home/ubuntu/winter/monitoring/
+
+    - name: copy k8s files
+      copy:
+        src: /home/carrie/winter/kubernetes/
+        dest: /home/ubuntu/winter/kubernetes/
+
+    - name: install k3s
+      shell: curl -sfL https://get.k3s.io | sh -s - \
+       --write-kubeconfig-mode 644
+      args:
+        creates: /usr/local/bin/k3s
+
+    - name: install helm
+      shell: |
+        curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      args:
+        creates: /usr/local/bin/helm
+
+    - name: install prometheus and grafana
+      shell: |
+        export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+        bash install-monitoring.sh
+      args:
+        chdir: /home/ubuntu/winter/monitoring
+
+    - name: run k3s
+      command: kubectl apply -f .
+      args:
+        chdir: /home/ubuntu/winter/kubernetes
+
+    - name: Get pods
+      command: kubectl get pods -n winter-space
+      register: pods
+
+    - debug:
+        var: pods.stdout
+
+    
+
+
